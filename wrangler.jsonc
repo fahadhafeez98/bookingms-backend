@@ -27,7 +27,7 @@
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
 	 */
-	"vars": { "DATABASE_URL": "postgresql://neondb_owner:npg_U2uOGDv5yYLC@ep-yellow-grass-a4fsxeoc-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require" },
+	"vars": { "DATABASE_URL": "postgresql://neondb_owner:npg_U2uOGDv5yYLC@ep-yellow-grass-a4fsxeoc-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require" }
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
