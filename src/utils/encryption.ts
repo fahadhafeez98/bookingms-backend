@@ -46,12 +46,16 @@ async function genEncryptionKey(password: string): Promise<CryptoKey> {
 }
 
 // Generate a signed JWT token
-export const generateToken = (
+// In encryption.ts
+export const generateToken = async (
   data: Record<string, unknown>,
   expiry = 432000 // Default expiry of 5 days in seconds
 ): Promise<string> => {
+  // Use environment variable or fallback to a default for development
+  const secretKey = globalThis.env?.ENCRYPTION_SECRET_KEY || 'dev-secret-key-for-testing-only';
+  
   const exp = Math.floor(Date.now() / 1000) + expiry;
-  return jwt.sign({ exp, ...data }, globalThis.env.ENCRYPTION_SECRET_KEY);
+  return jwt.sign({ exp, ...data }, secretKey);
 };
 
 // Verify a JWT token

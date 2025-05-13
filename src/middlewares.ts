@@ -28,3 +28,24 @@ export const checkLogin = async (c: any, next: any) => {
     }
     return authorized ? next() : c.text('Login Required', 401);
 };
+
+export const checkRole = (allowedRoles: string[]) => async (c: any, next: any) => {
+    const user = c.get('user');
+    if (!user || !allowedRoles.includes(user.role)) {
+      return c.text('Unauthorized', 403);
+    }
+    return next();
+  };
+
+//  Middleware for admin-only routes
+  export const adminOnly = async (c: any, next: any) => {
+      const user = c.get('user');
+      if (!user || user.role !== 'admin') {
+        return c.json({
+          status: 'error',
+          code: 403,
+          message: 'Admin access required',
+        }, 403);
+      }
+      return next();
+  };
