@@ -1,18 +1,16 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import app from './app';
+import { getDbConnection } from './db';
 
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
-	},
-} satisfies ExportedHandler<Env>;
+  fetch: async (req: Request, env: Env, ctx: ExecutionContext) => {
+    // Initialize DB and R2
+    env.DB = getDbConnection(env.DATABASE_URL); // Neon DB connection
+
+	globalThis.env = env;
+
+	await import('./routes'); 
+
+    // Pass the request to the Hono app
+    return app.fetch(req, env, ctx);
+  },
+};
