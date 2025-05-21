@@ -23,5 +23,21 @@
 		"hono": "^4.7.7",
 		"kysely": "^0.28.1",
 		"string-to-arraybuffer": "^1.0.2"
-	}
+	},
+	"main": "index.js",
+	"directories": {
+		"test": "test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fahadhafeez98/bookingms-backend.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/fahadhafeez98/bookingms-backend/issues"
+	},
+	"homepage": "https://github.com/fahadhafeez98/bookingms-backend#readme",
+	"description": ""
 }
