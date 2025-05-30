@@ -1,5 +1,5 @@
 import app from '../app';
-import {createAgent,getAgent,getAgentByName,updateAgent,deleteAgent} from '../services/agent/index';
+import {createAgent,getAgent,getAgentByName,updateAgent,deleteAgent,getExistingAgentNames } from '../services/agent/index';
 
 app.post('/agent',async (c) =>{
     try{
@@ -61,4 +61,12 @@ app.delete('/agent/:id', async (c) => {
   }
 });
 
-
+app.get('/agent-names/existing', async (c) => {
+  try {
+    const result = await getExistingAgentNames(globalThis.env.DB);
+    return c.json(result);
+  } catch (error) {
+    console.error('Error fetching agent names:', error);
+    return c.json({ status: 'error', message: 'Failed to fetch agent names' }, 500);
+  }
+});

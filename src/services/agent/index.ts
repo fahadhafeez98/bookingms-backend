@@ -398,3 +398,34 @@ export const deleteAgent = async (id: number, db: any) => {
     };
   }
 };
+
+export const getExistingAgentNames = async (db: any) => {
+  try {
+    const agentName = await db 
+     .selectFrom('agent')
+     .select('agent_name')
+     .distinct()
+     .where ('agent_name', 'is not', null)
+     .where('agent_name', '!=', '')
+     .orderBy('agent_name', 'asc')
+    .execute();
+
+    const formattedNames = agentName.map(item => item.agent_name);
+
+      return {
+      status: 'success',
+      code: 200,
+      agentNames: formattedNames
+    };
+    
+  }
+  catch(error){
+     console.error('Error getting agent names:', error);
+    return {
+      status: 'error',
+      code: 500,
+      message: 'Failed to fetch agent names',
+      errors: error.message
+    };
+  } 
+}
