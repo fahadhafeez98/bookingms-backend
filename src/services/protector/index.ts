@@ -12,7 +12,9 @@ export const createProtector = async (body: any, db:any) => {
         ncb_fee_6700_date: body.ncb_fee_6700_date,
         ncb_fee_500_date: body.ncb_fee_500_date,
         protector_date: body.protector_date,
-        additional_charges: body.additional_charges
+        additional_charges: body.additional_charges,
+        file_no: body.file_no,
+        employee: body.employee
       })
       .returningAll()
       .executeTakeFirst();
@@ -69,7 +71,9 @@ export const updateProtector = async (id: number, body: any,db:any) => {
         ncb_fee_6700_date: body.ncb_fee_6700_date,
         ncb_fee_500_date: body.ncb_fee_500_date,
         protector_date: body.protector_date,
-        additional_charges: body.additional_charges
+        additional_charges: body.additional_charges,
+        file_no: body.file_no,
+        employee: body.employee
       })
       .where('id', '=', id)
       .returningAll()
