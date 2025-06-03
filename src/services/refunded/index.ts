@@ -5,9 +5,13 @@ export const createRefunded = async (body: any, db: any) => {
       .insertInto('refunded')
       .values({
         name: body.name,
+        employee:body.employee,
         date: body.date,
         passport: body.passport,
-        reference: body.reference
+        reference: body.reference,
+        paid_fee_date:body.paid_fee_date,
+        paid_refund_date:body.paid_refund_date,
+        total_balance:body.total_balance
       })
       .returningAll()
       .executeTakeFirst();
@@ -58,9 +62,13 @@ export const updateRefunded = async (id: number, body: any, db: any) => {
       .updateTable('refunded')
       .set({
         name: body.name,
+        employee:body.employee,
         date: body.date,
         passport: body.passport,
-        reference: body.reference
+        reference: body.reference,
+        paid_fee_date:body.paid_fee_date,
+        paid_refund_date:body.paid_refund_date,
+        total_balance:body.total_balance
       })
       .where('id', '=', id)
       .returningAll()

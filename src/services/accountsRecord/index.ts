@@ -34,6 +34,7 @@ export const createEntry = async (body: any, db: any) => {
       .insertInto('office_accounts')
       .values({
         bank_name: body.bank_name,
+        employee_name:body.employee_name,
         date: body.date,
         detail: body.detail,
         credit: credit,
@@ -63,7 +64,7 @@ export const getEntriesByBank = async (bankName: string, db: any) => {
   try {
     const entries = await db
       .selectFrom('office_accounts')
-      .select(['id', 'date', 'detail', 'credit', 'debit', 'balance'])
+      .select(['id','employee_name', 'date', 'detail', 'credit', 'debit', 'balance'])
       .where('bank_name', '=', bankName)
       .orderBy('date', 'asc')
       .execute();
@@ -71,6 +72,7 @@ export const getEntriesByBank = async (bankName: string, db: any) => {
     // Format output
     return entries.map(entry => ({
       id: entry.id,
+      employee_name:entry.employee_name,
       date: entry.date,
       detail: entry.detail,
       credit: Number(entry.credit),
@@ -105,7 +107,7 @@ export const updateEntry = async (id: number, body: any, db: any) => {
     // First get the entry to be updated
     const existingEntry = await db
       .selectFrom('office_accounts')
-      .select(['id', 'bank_name', 'credit', 'debit', 'balance'])
+      .select(['id','employee_name', 'bank_name', 'credit', 'debit', 'balance'])
       .where('id', '=', id)
       .executeTakeFirst();
 
@@ -116,7 +118,7 @@ export const updateEntry = async (id: number, body: any, db: any) => {
     // Get all entries for the bank in chronological order
     const allEntries = await db
       .selectFrom('office_accounts')
-      .select(['id', 'credit', 'debit', 'balance'])
+      .select(['id','employee_name', 'credit', 'debit', 'balance'])
       .where('bank_name', '=', existingEntry.bank_name)
       .orderBy('date', 'asc')
       .orderBy('id', 'asc')
@@ -141,6 +143,7 @@ export const updateEntry = async (id: number, body: any, db: any) => {
     const updatedEntry = await db
       .updateTable('office_accounts')
       .set({
+        employee_name:body.employee_name,
         date: body.date,
         detail: body.detail,
         credit: credit,
@@ -185,13 +188,14 @@ export const updateEntry = async (id: number, body: any, db: any) => {
     // Get the updated entry with correct balance
     const finalEntry = await db
       .selectFrom('office_accounts')
-      .select(['id', 'date', 'detail', 'credit', 'debit', 'balance'])
+      .select(['id','employee_name', 'date', 'detail', 'credit', 'debit', 'balance'])
       .where('id', '=', id)
       .executeTakeFirst();
     
     // Format output
     return {
       id: finalEntry.id,
+      employee_name:finalEntry.employee_name,
       date: finalEntry.date,
       detail: finalEntry.detail,
       credit: Number(finalEntry.credit),
