@@ -11,7 +11,8 @@ export const createRefunded = async (body: any, db: any) => {
         reference: body.reference,
         paid_fee_date:body.paid_fee_date,
         paid_refund_date:body.paid_refund_date,
-        total_balance:body.total_balance
+        total_balance:body.total_balance,
+        withdraw:body.withdraw
       })
       .returningAll()
       .executeTakeFirst();
@@ -68,7 +69,8 @@ export const updateRefunded = async (id: number, body: any, db: any) => {
         reference: body.reference,
         paid_fee_date:body.paid_fee_date,
         paid_refund_date:body.paid_refund_date,
-        total_balance:body.total_balance
+        total_balance:body.total_balance,
+        withdraw:body.withdraw
       })
       .where('id', '=', id)
       .returningAll()

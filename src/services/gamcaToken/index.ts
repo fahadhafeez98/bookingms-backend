@@ -6,13 +6,13 @@ export const createGamcaToken = async (body: any, db: any) => {
         .insertInto('gamca_token') // Table name
         .values({
           employee_name: body.employee_name,
-          entry: body.entry,
           customer_add: body.customer_add,
           reference: body.reference,
           country: body.country,
           passport_detail: body.passport_detail,
           receivable_amount: body.receivable_amount,
           paid_cash: body.paid_cash,
+          paid_from_bank: body.paid_from_bank,
           paid_in_bank: body.paid_in_bank,
           profit: body.profit,
           remaining_amount: body.remaining_amount,
@@ -44,13 +44,13 @@ export const createGamcaToken = async (body: any, db: any) => {
         .updateTable('gamca_token')
         .set({
           employee_name: body.employee_name,
-          entry: body.entry,
           customer_add: body.customer_add,
           reference: body.reference,
           country: body.country,
           passport_detail: body.passport_detail,
           receivable_amount: body.receivable_amount,
           paid_cash: body.paid_cash,
+          paid_from_bank: body.paid_from_bank,
           paid_in_bank: body.paid_in_bank,
           profit: body.profit,
           remaining_amount: body.remaining_amount

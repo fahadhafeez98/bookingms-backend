@@ -14,7 +14,8 @@ export const createProtector = async (body: any, db:any) => {
         protector_date: body.protector_date,
         additional_charges: body.additional_charges,
         file_no: body.file_no,
-        employee: body.employee
+        employee: body.employee,
+        withdraw: body.withdraw
       })
       .returningAll()
       .executeTakeFirst();
@@ -73,7 +74,8 @@ export const updateProtector = async (id: number, body: any,db:any) => {
         protector_date: body.protector_date,
         additional_charges: body.additional_charges,
         file_no: body.file_no,
-        employee: body.employee
+        employee: body.employee,
+        withdraw: body.withdraw
       })
       .where('id', '=', id)
       .returningAll()

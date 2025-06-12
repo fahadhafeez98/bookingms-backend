@@ -6,7 +6,6 @@ export const createVisaProcessing = async (body: any, db: any) => {
         .insertInto('visa_processing')
         .values({
           employee_name: body.employee_name,
-          entry: body.entry,
           file_number: body.file_number,
           reference: body.reference,
           sponsor_name: body.sponsor_name,
@@ -20,6 +19,7 @@ export const createVisaProcessing = async (body: any, db: any) => {
           embassy_send_date: body.embassy_send_date,
           embassy_return_date: body.embassy_return_date,
           protector_date: body.protector_date,
+          expiry_medical_date: body.expiry_medical_date,
           passport_deliver_date: body.passport_deliver_date,
           receivable_amount: body.receivable_amount,
           additional_charges: body.additional_charges,
@@ -55,7 +55,7 @@ export const createVisaProcessing = async (body: any, db: any) => {
         .updateTable('visa_processing')
         .set({
           employee_name: body.employee_name,
-          entry: body.entry,
+         
           file_number: body.file_number,
           reference: body.reference,
           sponsor_name: body.sponsor_name,
@@ -69,6 +69,7 @@ export const createVisaProcessing = async (body: any, db: any) => {
           embassy_send_date: body.embassy_send_date,
           embassy_return_date: body.embassy_return_date,
           protector_date: body.protector_date,
+          expiry_medical_date: body.expiry_medical_date,
           passport_deliver_date: body.passport_deliver_date,
           receivable_amount: body.receivable_amount,
           additional_charges: body.additional_charges,

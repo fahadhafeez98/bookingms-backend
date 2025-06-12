@@ -10,7 +10,8 @@ export const createExpense = async (body: any, db: any) => {
         date: body.date,
         detail: body.detail,
         total_amount: body.total_amount,
-        selection: body.selection
+        selection: body.selection,
+        withdraw:body.withdraw
       })
       .returningAll()
       .executeTakeFirst();
@@ -97,7 +98,8 @@ export const updateExpense = async (id: number, body: any, db: any) => {
         date: body.date,
         detail: body.detail,
         total_amount: body.total_amount,
-        selection: body.selection
+        selection: body.selection,
+        withdraw:body.withdraw
       })
       .where('id', '=', id)
       .returningAll()
